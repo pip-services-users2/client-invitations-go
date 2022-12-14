@@ -9,16 +9,16 @@ import (
 	"github.com/pip-services3-gox/pip-services3-commons-gox/config"
 )
 
-type invitationsGrpcClientV1Test struct {
-	client  *version1.InvitationGrpcClientV1
+type invitationsCommandableGrpcClientV1Test struct {
+	client  *version1.InvitationsCommandableGrpcClientV1
 	fixture *InvitationsClientFixtureV1
 }
 
-func newInvitationsGrpcClientV1Test() *invitationsGrpcClientV1Test {
-	return &invitationsGrpcClientV1Test{}
+func newInvitationsCommandableGrpcClientV1Test() *invitationsCommandableGrpcClientV1Test {
+	return &invitationsCommandableGrpcClientV1Test{}
 }
 
-func (c *invitationsGrpcClientV1Test) setup(t *testing.T) {
+func (c *invitationsCommandableGrpcClientV1Test) setup(t *testing.T) {
 	var GRPC_HOST = os.Getenv("GRPC_HOST")
 	if GRPC_HOST == "" {
 		GRPC_HOST = "localhost"
@@ -34,27 +34,27 @@ func (c *invitationsGrpcClientV1Test) setup(t *testing.T) {
 		"connection.port", GRPC_PORT,
 	)
 
-	c.client = version1.NewInvitationGrpcClientV1()
+	c.client = version1.NewInvitationsCommandableGrpcClientV1()
 	c.client.Configure(context.Background(), httpConfig)
 	c.client.Open(context.Background(), "")
 
 	c.fixture = NewInvitationsClientFixtureV1(c.client)
 }
 
-func (c *invitationsGrpcClientV1Test) teardown(t *testing.T) {
+func (c *invitationsCommandableGrpcClientV1Test) teardown(t *testing.T) {
 	c.client.Close(context.Background(), "")
 }
 
-func TestGrpcCrudOperations(t *testing.T) {
-	c := newInvitationsGrpcClientV1Test()
+func TestCommandableGrpcCrudOperations(t *testing.T) {
+	c := newInvitationsCommandableGrpcClientV1Test()
 	c.setup(t)
 	defer c.teardown(t)
 
 	c.fixture.TestCrudOperations(t)
 }
 
-func TestGrpcNotifyInvitation(t *testing.T) {
-	c := newInvitationsGrpcClientV1Test()
+func TestCommandableGrpcNotifyInvitation(t *testing.T) {
+	c := newInvitationsCommandableGrpcClientV1Test()
 	c.setup(t)
 	defer c.teardown(t)
 
