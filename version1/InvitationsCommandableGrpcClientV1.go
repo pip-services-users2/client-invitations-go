@@ -29,9 +29,6 @@ func NewInvitationsCommandableGrpcClientV1WithConfig(config *cconf.ConfigParams)
 }
 
 func (c *InvitationsCommandableGrpcClientV1) GetInvitations(ctx context.Context, correlationId string, filter *data.FilterParams, paging *data.PagingParams) (result data.DataPage[*InvitationV1], err error) {
-	timing := c.Instrument(ctx, correlationId, "invitations.get_invitations")
-	defer timing.EndTiming(ctx, err)
-
 	params := data.NewAnyValueMapFromTuples(
 		"filter", filter,
 		"paging", paging,
@@ -46,9 +43,6 @@ func (c *InvitationsCommandableGrpcClientV1) GetInvitations(ctx context.Context,
 }
 
 func (c *InvitationsCommandableGrpcClientV1) GetInvitationById(ctx context.Context, correlationId string, invitationId string) (result *InvitationV1, err error) {
-	timing := c.Instrument(ctx, correlationId, "invitations.get_invitation_by_id")
-	defer timing.EndTiming(ctx, err)
-
 	params := data.NewAnyValueMapFromTuples(
 		"invitation_id", invitationId,
 	)
@@ -62,9 +56,6 @@ func (c *InvitationsCommandableGrpcClientV1) GetInvitationById(ctx context.Conte
 }
 
 func (c *InvitationsCommandableGrpcClientV1) CreateInvitation(ctx context.Context, correlationId string, invitation *InvitationV1) (result *InvitationV1, err error) {
-	timing := c.Instrument(ctx, correlationId, "invitations.create_invitation")
-	defer timing.EndTiming(ctx, err)
-
 	params := data.NewAnyValueMapFromTuples(
 		"invitation", invitation,
 	)
@@ -78,9 +69,6 @@ func (c *InvitationsCommandableGrpcClientV1) CreateInvitation(ctx context.Contex
 }
 
 func (c *InvitationsCommandableGrpcClientV1) DeleteInvitationById(ctx context.Context, correlationId string, invitationId string) (result *InvitationV1, err error) {
-	timing := c.Instrument(ctx, correlationId, "invitations.delete_invitation_by_id")
-	defer timing.EndTiming(ctx, err)
-
 	params := data.NewAnyValueMapFromTuples(
 		"invitation_id", invitationId,
 	)
@@ -94,9 +82,6 @@ func (c *InvitationsCommandableGrpcClientV1) DeleteInvitationById(ctx context.Co
 }
 
 func (c *InvitationsCommandableGrpcClientV1) ActivateInvitations(ctx context.Context, correlationId string, email string, userId string) (result []*InvitationV1, err error) {
-	timing := c.Instrument(ctx, correlationId, "invitations.activate_invitations")
-	defer timing.EndTiming(ctx, err)
-
 	params := data.NewAnyValueMapFromTuples(
 		"email", email,
 		"user_id", userId,
@@ -111,9 +96,6 @@ func (c *InvitationsCommandableGrpcClientV1) ActivateInvitations(ctx context.Con
 }
 
 func (c *InvitationsCommandableGrpcClientV1) ApproveInvitation(ctx context.Context, correlationId string, invitationId string, role string) (result *InvitationV1, err error) {
-	timing := c.Instrument(ctx, correlationId, "invitations.deny_invitation")
-	defer timing.EndTiming(ctx, err)
-
 	params := data.NewAnyValueMapFromTuples(
 		"invitation_id", invitationId,
 		"role", role,
@@ -128,9 +110,6 @@ func (c *InvitationsCommandableGrpcClientV1) ApproveInvitation(ctx context.Conte
 }
 
 func (c *InvitationsCommandableGrpcClientV1) DenyInvitation(ctx context.Context, correlationId string, invitationId string) (result *InvitationV1, err error) {
-	timing := c.Instrument(ctx, correlationId, "invitations.resend_invitation")
-	defer timing.EndTiming(ctx, err)
-
 	params := data.NewAnyValueMapFromTuples(
 		"invitation_id", invitationId,
 	)
@@ -144,9 +123,6 @@ func (c *InvitationsCommandableGrpcClientV1) DenyInvitation(ctx context.Context,
 }
 
 func (c *InvitationsCommandableGrpcClientV1) ResendInvitation(ctx context.Context, correlationId string, invitationId string) (result *InvitationV1, err error) {
-	timing := c.Instrument(ctx, correlationId, "invitations.resend_invitation")
-	defer timing.EndTiming(ctx, err)
-
 	params := data.NewAnyValueMapFromTuples(
 		"invitation_id", invitationId,
 	)
@@ -160,9 +136,6 @@ func (c *InvitationsCommandableGrpcClientV1) ResendInvitation(ctx context.Contex
 }
 
 func (c *InvitationsCommandableGrpcClientV1) NotifyInvitation(ctx context.Context, correlationId string, invitation *InvitationV1) (err error) {
-	timing := c.Instrument(ctx, correlationId, "invitations.notify_invitation")
-	defer timing.EndTiming(ctx, err)
-
 	params := data.NewAnyValueMapFromTuples(
 		"invitation", invitation,
 	)

@@ -9,16 +9,16 @@ import (
 	"github.com/pip-services3-gox/pip-services3-commons-gox/config"
 )
 
-type invitationsHttpClientV1Test struct {
-	client  *version1.InvitationsHttpClientV1
+type invitationsCommandableHttpClientV1Test struct {
+	client  *version1.InvitationsCommandableHttpClientV1
 	fixture *InvitationsClientFixtureV1
 }
 
-func newInvitationsHttpClientV1Test() *invitationsHttpClientV1Test {
-	return &invitationsHttpClientV1Test{}
+func newInvitationsCommandableHttpClientV1Test() *invitationsCommandableHttpClientV1Test {
+	return &invitationsCommandableHttpClientV1Test{}
 }
 
-func (c *invitationsHttpClientV1Test) setup(t *testing.T) {
+func (c *invitationsCommandableHttpClientV1Test) setup(t *testing.T) {
 	var HTTP_HOST = os.Getenv("HTTP_HOST")
 	if HTTP_HOST == "" {
 		HTTP_HOST = "localhost"
@@ -41,20 +41,20 @@ func (c *invitationsHttpClientV1Test) setup(t *testing.T) {
 	c.fixture = NewInvitationsClientFixtureV1(c.client)
 }
 
-func (c *invitationsHttpClientV1Test) teardown(t *testing.T) {
+func (c *invitationsCommandableHttpClientV1Test) teardown(t *testing.T) {
 	c.client.Close(context.Background(), "")
 }
 
-func TestHttpCrudOperations(t *testing.T) {
-	c := newInvitationsHttpClientV1Test()
+func TestCommandableHttpCrudOperations(t *testing.T) {
+	c := newInvitationsCommandableHttpClientV1Test()
 	c.setup(t)
 	defer c.teardown(t)
 
 	c.fixture.TestCrudOperations(t)
 }
 
-func TestHttpNotifyInvitation(t *testing.T) {
-	c := newInvitationsHttpClientV1Test()
+func TestCommandableHttpNotifyInvitation(t *testing.T) {
+	c := newInvitationsCommandableHttpClientV1Test()
 	c.setup(t)
 	defer c.teardown(t)
 
