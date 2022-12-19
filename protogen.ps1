@@ -21,7 +21,7 @@ docker build -f "$PSScriptRoot/docker/Dockerfile.proto" -t $protoImage .
 
 # Create and copy compiled files, then destroy the container
 docker create --name $container $protoImage
-docker cp "$($container):/go/eic/protos" "$PSScriptRoot/"
+docker cp "$($container):/app/protos" "$PSScriptRoot/"
 docker rm $container
 
 # Verify that protos folder was indeed created after generating proto files
