@@ -6,8 +6,7 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile.test
-    image: ${IMAGE:-mst/test}
-    command: ${TEST_CMD:-go test ./test/...}
+    image: ${IMAGE:-pipservices/test}
     links:
       - service
     environment:
@@ -17,37 +16,9 @@ services:
       - HTTP_PORT=8080
 
   service:
-    image: pipdevs/service-invitations-node:latest
-    environment:
-      - ROLES_SERVICE_HOST=roles
-      - ROLES_SERVICE_PORT=8080
-      - MESSAGE_DISTRIBUTION_SERVICE_HOST=roles
-      - MESSAGE_DISTRIBUTION_SERVICE_PORT=8080
-      - HTTP_ENABLED=true
-      - GRPC_ENABLED=true
-
-  roles:
-    image: pipdevs/service-roles-node:latest
-    # image: pipdevs/service-roles-nodex:latest
+    image: pipdevs/service-accounts-node:latest
     environment:
       - HTTP_ENABLED=true
       - GRPC_ENABLED=true
-
-  msgdistribution:
-    image: pipdevs/service-msgdistribution-node:latest
-    # image: pipdevs/service-msgdistribution-nodex:latest
-    links:
-      - email
-    environment:
-      - EMAIL_SERVICE_HOST=email
-      - EMAIL_SERVICE_PORT=8080
-      - HTTP_ENABLED=true
-      - GRPC_ENABLED=true
-
-  email:
-    image: pipdevs/service-email-node:latest
-    # image: pipdevs/service-email-nodex:latest
-    environment:
-      - EMAIL_DISABLED=true
-      - HTTP_ENABLED=true
-      - GRPC_ENABLED=true
+      - GRPC_PORT=8090
+      - HTTP_PORT=8080
